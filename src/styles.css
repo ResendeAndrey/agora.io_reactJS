@@ -1,0 +1,14 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+#livestream {
+  position: relative !important;
+  width: 350px;
+  height: 350px;
+  margin: 0 auto;
+}
+
+#livestream video {
+  position: relative !important;
+}
