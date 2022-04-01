@@ -130,6 +130,37 @@ const Video = () => {
       }
     );
   }
+  client.on("stream-removed", function (evt) {
+    var stream = evt.stream;
+    stream.stop(); // stop the stream
+    stream.close(); // clean up and close the camera stream
+    console.log("Remote stream is removed " + stream.getId());
+  });
+
+  // remove the remote-container when a user leaves the channel
+  client.on("peer-leave", function (evt) {
+    var stream = evt.stream;
+    console.log("Remote stream has left the channel: " + evt.uid);
+    stream.stop(); // stop the stream
+  });
+
+  // show mute icon whenever a remote has muted their mic
+  client.on("mute-audio", function (evt) {
+    var remoteId = evt.uid;
+  });
+
+  client.on("unmute-audio", function (evt) {
+    var remoteId = evt.uid;
+  });
+
+  // show user icon whenever a remote has disabled their video
+  client.on("mute-video", function (evt) {
+    var remoteId = evt.uid;
+  });
+
+  client.on("unmute-video", function (evt) {
+    var remoteId = evt.uid;
+  });
 
   return (
     <div>
@@ -200,9 +231,6 @@ const Video = () => {
         <div id="livestream"></div>
       )}
 
-      <div id="livestream"></div>
-      <div id="livestream"></div>
-      <div id="livestream"></div>
       <div id="livestream"></div>
     </div>
   );
